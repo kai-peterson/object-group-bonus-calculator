@@ -40,25 +40,33 @@ const employees = [
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-console.log( employees );
-
-for (i = 0; i < employees.length; i++) {
-  console.log(employeeBonus(employees[i]));
-}
+console.log(employees);
 
 function employeeBonus(employee) {
   let newEmployeeObject = {};
   let bonusPercentage = bonusCalculation(employee);
   let totalBonus = Math.round(employee.annualSalary * bonusPercentage);
   let totalCompensation = totalBonus + Number(employee.annualSalary);
-  
+
   newEmployeeObject.name = employee.name;
   newEmployeeObject.bonusPercentage = bonusPercentage;
   newEmployeeObject.totalBonus = totalBonus;
   newEmployeeObject.totalCompensation = totalCompensation;
   return newEmployeeObject;
-  
+
 }
+
+function getResults() {
+  for (i = 0; i < employees.length; i++) {
+    console.log(employeeBonus(employees[i]));
+    let result = employeeBonus(employees[i]);
+    let formattedResult = 'Employee name: ' + result.name + '; Bonus Percentage: ' + result.bonusPercentage + '; totalBonus: ' + result.totalBonus + '; totalCompensation: ' + result.totalCompensation;
+    document.getElementById('output' + i).innerHTML = formattedResult;
+  }
+}
+
+getResults();
+
 
 function bonusCalculation(employee) {
   let bonusPercentage = 0;
